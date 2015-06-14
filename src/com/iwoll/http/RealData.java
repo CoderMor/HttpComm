@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 /**
- * 执行请求获取数据
+ * 鍙戣捣缃戠粶璇锋眰鑾峰彇鏁版嵁
  * @author Esen
  *
  */
@@ -30,26 +30,26 @@ public class RealData implements Callable<String>{
 		// TODO Auto-generated method stub
 		HttpConnection connection = new HttpConnection();
 		StringBuilder builder = new StringBuilder();
-        String len;
-        InputStream inputStream = new BufferedInputStream(connection.dispatchConnection("GET", requestUrl, requestParams, null));
-        if (inputStream != null) {
-            BufferedReader br;
-            try {
-                br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-                while ((len = br.readLine()) != null) {
-                    builder.append(len);
-                }
-            } catch (UnsupportedEncodingException e) {
+        	String len;
+        	InputStream inputStream = new BufferedInputStream(connection.dispatchConnection("GET", requestUrl, requestParams, null));
+        	if (inputStream != null) {
+            		BufferedReader br;
+	        	try {
+                		br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                		while ((len = br.readLine()) != null) {
+                    			builder.append(len);
+                		}
+            		} catch (UnsupportedEncodingException e) {
               
-            } catch (IOException e) {
+            		} catch (IOException e) {
                
-            }finally{
-            	inputStream.close();
-            	connection.closeConnection();
-            }
-        }
+            		}finally{
+            			inputStream.close();
+            			connection.closeConnection();
+        	 	}
+        	}
 
-        return builder.toString();
+        	return builder.toString();
 	
 	}
 }
