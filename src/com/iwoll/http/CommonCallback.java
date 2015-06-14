@@ -1,6 +1,6 @@
 package com.iwoll.http;
 /**
- * 回调接口
+ * 閫氱敤鍥炶皟鎺ュ彛
  * @author Esen
  *
  */
