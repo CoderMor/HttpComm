@@ -31,7 +31,7 @@ public class RealData implements Callable<String>{
 		HttpConnection connection = new HttpConnection();
 		StringBuilder builder = new StringBuilder();
         	String len;
-        	InputStream inputStream = new BufferedInputStream(connection.dispatchConnection("GET", requestUrl, requestParams, null));
+        	InputStream inputStream = connection.dispatchConnection("GET", requestUrl, requestParams, null);
         	if (inputStream != null) {
             		BufferedReader br;
 	        	try {
