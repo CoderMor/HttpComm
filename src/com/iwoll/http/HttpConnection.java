@@ -149,7 +149,7 @@ public class HttpConnection {
             	//如果支持则应该使用GZIPInputStream解压，否则会出现乱码无效数据
                 return new GZIPInputStream(connection.getInputStream());    
             }
-            if (connection.getResponseCode() != 200)
+            if (connection.getResponseCode() == 200)
                 return connection.getInputStream();
                 
             return null;
