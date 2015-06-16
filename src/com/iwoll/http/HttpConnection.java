@@ -24,10 +24,10 @@ public class HttpConnection {
         public HttpConnection() {}
 
         /**
-         * GETÇëÇó»ñÈ¡HttpURLConnection¶ÔÏó
-         * @param url ÇëÇóµØÖ·
-         * @param params ÇëÇó²ÎÊı
-         * @param header ÇëÇóhttpÍ·
+         * GETè¯·æ±‚è·å–HttpURLConnectionå¯¹è±¡
+         * @param url è¯·æ±‚åœ°å€
+         * @param params è¯·æ±‚å‚æ•°
+         * @param header è¯·æ±‚httpå¤´
          * @return HttpURLConnection
          */
         private HttpURLConnection doGetConnection(String url, Map<String, String> params, Map<String, String> header) {
@@ -74,10 +74,10 @@ public class HttpConnection {
         }
 
         /**
-         * POSTÇëÇó»ñÈ¡HttpURLConnection¶ÔÏó
-         * @param url ÇëÇóµØÖ·
-         * @param params ÇëÇó²ÎÊı
-         * @param header ÇëÇóhttpÍ·
+         * POSTè¯·æ±‚è·å–HttpURLConnectionå¯¹è±¡
+         * @param url è¯·æ±‚åœ°å€
+         * @param params è¯·æ±‚å‚æ•°
+         * @param header è¯·æ±‚httpå¤´
          * @return HttpURLConnection
          */
         private HttpURLConnection doPostConnection(String url, Map<String, String> params, Map<String, String> header) {
@@ -126,11 +126,11 @@ public class HttpConnection {
         }
         
         /**
-         * ·Ö·¢ÇëÇó
-         * @param method ÇëÇó·½·¨-GET¡¢POST
-         * @param url ÇëÇóµØÖ·
-         * @param params ÇëÇó²ÎÊı
-         * @param header ÇëÇóhttpÍ·
+         * åˆ†å‘è¯·æ±‚
+         * @param method è¯·æ±‚æ–¹æ³•-GETã€POST
+         * @param url è¯·æ±‚åœ°å€
+         * @param params è¯·æ±‚å‚æ•°
+         * @param header è¯·æ±‚httpå¤´
          * @return InputStream
          * @throws IOException
          */
@@ -144,16 +144,19 @@ public class HttpConnection {
             }
             connection.connect();
             String encoding = connection.getContentEncoding();
-            //Ê×ÏÈÅĞ¶Ï·şÎñÆ÷·µ»ØµÄÊı¾İÊÇ·ñÖ§³ÖgzipÑ¹Ëõ
+            //é¦–å…ˆåˆ¤æ–­æœåŠ¡å™¨è¿”å›çš„æ•°æ®æ˜¯å¦æ”¯æŒgzipå‹ç¼©
             if (encoding != null && encoding.contains("gzip")) {
-            	//Èç¹ûÖ§³ÖÔòÓ¦¸ÃÊ¹ÓÃGZIPInputStream½âÑ¹£¬·ñÔò»á³öÏÖÂÒÂëÎŞĞ§Êı¾İ
+            	//å¦‚æœæ”¯æŒåˆ™åº”è¯¥ä½¿ç”¨GZIPInputStreamè§£å‹ï¼Œå¦åˆ™ä¼šå‡ºç°ä¹±ç æ— æ•ˆæ•°æ®
                 return new GZIPInputStream(connection.getInputStream());    
             }
-            return connection.getInputStream();
+            if (connection.getResponseCode() != 200)
+                return connection.getInputStream();
+                
+            return null;
         }
         
         /**
-         * ¹Ø±ÕÁ¬½Ó
+         * å…³é—­è¿æ¥
          */
         public void closeConnection(){
 
